@@ -12,7 +12,8 @@ public class removeLinkList203 {
             start = start.next;
         }
         System.out.println(root.print());
-        System.out.println(removeElements(root, 6 ).print());
+        //System.out.println(removeElements(root, 6 ).print());
+        System.out.println(removeElements2(root, 6 ).print());
     }
     //use recursion to return different value
     public static ListNode removeElements(ListNode head, int val) {
@@ -20,6 +21,24 @@ public class removeLinkList203 {
         head.next = removeElements(head.next, val);
         return head.val == val ? head.next : head;
     }
+    //without recursion
+    public static ListNode removeElements2(ListNode head, int val) {
+        if (head == null) {
+            return null;
+        }
+        ListNode dummy = new ListNode();
+        dummy.next = head; //grasp the head to return
+        ListNode cur = dummy; // for checking
 
+        while (cur.next != null){
+            if (cur.next.val == val){
+                cur.next = cur.next.next;
+                // Here cannot move cur to cur.next as we need to validate the next node.
+            }else {
+                cur = cur.next;
+            }
+        }
+        return dummy.next;
+    }
 
 }
